@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "project_teams",
+  "info": {
+    "singularName": "project-team",
+    "pluralName": "project-teams",
+    "displayName": "project_team"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "person_id": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::person.person"
+    },
+    "positions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::position.position"
+    },
+    "projects": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::project.project"
+    }
+  }
+}
