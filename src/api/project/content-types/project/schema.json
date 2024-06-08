@@ -12,14 +12,15 @@
   "pluginOptions": {},
   "attributes": {
     "project_name": {
-      "type": "string",
-      "required": true,
-      "unique": true
+      "type": "string"
     },
     "thumbnail": {
-      "type": "text",
-      "required": true,
-      "unique": false
+      "type": "string"
+    },
+    "product": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::product.product"
     }
   }
 }

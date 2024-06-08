@@ -11,20 +11,16 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "project_id": {
+    "project": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::project.project"
     },
     "description": {
-      "type": "text",
-      "required": true,
-      "unique": true
+      "type": "text"
     },
     "headline": {
-      "type": "string",
-      "required": true,
-      "unique": true
+      "type": "string"
     }
   }
 }

@@ -4,7 +4,8 @@
   "info": {
     "singularName": "person",
     "pluralName": "people",
-    "displayName": "person"
+    "displayName": "person",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -45,6 +46,9 @@
       "type": "string",
       "required": true,
       "unique": true
+    },
+    "website": {
+      "type": "string"
     }
   }
 }

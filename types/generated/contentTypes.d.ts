@@ -788,12 +788,65 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiCategoryCategory extends Schema.CollectionType {
+  collectionName: 'categories';
+  info: {
+    singularName: 'category';
+    pluralName: 'categories';
+    displayName: 'category';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    category_name: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiJobJob extends Schema.CollectionType {
+  collectionName: 'jobs';
+  info: {
+    singularName: 'job';
+    pluralName: 'jobs';
+    displayName: 'job';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    job_name: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::job.job', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::job.job', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 export interface ApiPersonPerson extends Schema.CollectionType {
   collectionName: 'people';
   info: {
     singularName: 'person';
     pluralName: 'people';
     displayName: 'person';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -806,6 +859,7 @@ export interface ApiPersonPerson extends Schema.CollectionType {
     linkedin: Attribute.String & Attribute.Required & Attribute.Unique;
     instagram: Attribute.String & Attribute.Required & Attribute.Unique;
     email: Attribute.String & Attribute.Required & Attribute.Unique;
+    website: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -824,30 +878,29 @@ export interface ApiPersonPerson extends Schema.CollectionType {
   };
 }
 
-export interface ApiPositionPosition extends Schema.CollectionType {
-  collectionName: 'positions';
+export interface ApiProductProduct extends Schema.CollectionType {
+  collectionName: 'products';
   info: {
-    singularName: 'position';
-    pluralName: 'positions';
-    displayName: 'position';
-    description: '';
+    singularName: 'product';
+    pluralName: 'products';
+    displayName: 'product';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    role: Attribute.String & Attribute.Required & Attribute.Unique;
+    product_name: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::position.position',
+      'api::product.product',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::position.position',
+      'api::product.product',
       'oneToOne',
       'admin::user'
     > &
@@ -866,8 +919,13 @@ export interface ApiProjectProject extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    project_name: Attribute.String & Attribute.Required & Attribute.Unique;
-    thumbnail: Attribute.Text & Attribute.Required;
+    project_name: Attribute.String;
+    thumbnail: Attribute.String;
+    product: Attribute.Relation<
+      'api::project.project',
+      'oneToOne',
+      'api::product.product'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -893,12 +951,22 @@ export interface ApiProjectCategoryProjectCategory
     singularName: 'project-category';
     pluralName: 'project-categories';
     displayName: 'project_category';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    category: Attribute.String & Attribute.Required & Attribute.Unique;
+    category_id: Attribute.Relation<
+      'api::project-category.project-category',
+      'oneToOne',
+      'api::category.category'
+    >;
+    project: Attribute.Relation<
+      'api::project-category.project-category',
+      'oneToOne',
+      'api::project.project'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -928,13 +996,13 @@ export interface ApiProjectDetailProjectDetail extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    project_id: Attribute.Relation<
+    project: Attribute.Relation<
       'api::project-detail.project-detail',
       'oneToOne',
       'api::project.project'
     >;
-    description: Attribute.Text & Attribute.Required & Attribute.Unique;
-    headline: Attribute.String & Attribute.Required & Attribute.Unique;
+    description: Attribute.Text;
+    headline: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -964,15 +1032,15 @@ export interface ApiProjectTeamProjectTeam extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    person_id: Attribute.Relation<
+    people: Attribute.Relation<
       'api::project-team.project-team',
       'oneToMany',
       'api::person.person'
     >;
-    positions: Attribute.Relation<
+    jobs: Attribute.Relation<
       'api::project-team.project-team',
       'oneToMany',
-      'api::position.position'
+      'api::job.job'
     >;
     projects: Attribute.Relation<
       'api::project-team.project-team',
@@ -1015,8 +1083,10 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::category.category': ApiCategoryCategory;
+      'api::job.job': ApiJobJob;
       'api::person.person': ApiPersonPerson;
-      'api::position.position': ApiPositionPosition;
+      'api::product.product': ApiProductProduct;
       'api::project.project': ApiProjectProject;
       'api::project-category.project-category': ApiProjectCategoryProjectCategory;
       'api::project-detail.project-detail': ApiProjectDetailProjectDetail;

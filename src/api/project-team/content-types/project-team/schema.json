@@ -11,15 +11,15 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "person_id": {
+    "people": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::person.person"
     },
-    "positions": {
+    "jobs": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::position.position"
+      "target": "api::job.job"
     },
     "projects": {
       "type": "relation",
