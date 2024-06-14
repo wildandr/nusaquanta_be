@@ -853,13 +853,13 @@ export interface ApiPersonPerson extends Schema.CollectionType {
   };
   attributes: {
     full_name: Attribute.String & Attribute.Required & Attribute.Unique;
-    headline: Attribute.String & Attribute.Required;
     description: Attribute.Text & Attribute.Required;
     github: Attribute.String & Attribute.Required & Attribute.Unique;
     linkedin: Attribute.String & Attribute.Required & Attribute.Unique;
     instagram: Attribute.String & Attribute.Required & Attribute.Unique;
     email: Attribute.String & Attribute.Required & Attribute.Unique;
     website: Attribute.String;
+    cv: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

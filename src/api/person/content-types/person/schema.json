@@ -17,11 +17,6 @@
       "required": true,
       "unique": true
     },
-    "headline": {
-      "type": "string",
-      "required": true,
-      "unique": false
-    },
     "description": {
       "type": "text",
       "required": true,
@@ -48,6 +43,9 @@
       "unique": true
     },
     "website": {
+      "type": "string"
+    },
+    "cv": {
       "type": "string"
     }
   }
