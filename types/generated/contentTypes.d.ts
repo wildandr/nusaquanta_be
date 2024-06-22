@@ -914,18 +914,19 @@ export interface ApiProjectProject extends Schema.CollectionType {
     singularName: 'project';
     pluralName: 'projects';
     displayName: 'project';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
     project_name: Attribute.String;
-    thumbnail: Attribute.String;
     product: Attribute.Relation<
       'api::project.project',
       'oneToOne',
       'api::product.product'
     >;
+    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
