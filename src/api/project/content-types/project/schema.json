@@ -15,20 +15,40 @@
     "project_name": {
       "type": "string"
     },
-    "product": {
+    "products": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::product.product"
+      "relation": "oneToMany",
+      "target": "api::product.product",
+      "mappedBy": "project"
     },
     "image": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::category.category",
+      "mappedBy": "project"
+    },
+    "project_teams": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::project-team.project-team",
+      "mappedBy": "project"
+    },
+    "project_detail": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::project-detail.project-detail",
+      "mappedBy": "project"
     }
   }
 }

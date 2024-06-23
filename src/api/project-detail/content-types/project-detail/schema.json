@@ -4,7 +4,8 @@
   "info": {
     "singularName": "project-detail",
     "pluralName": "project-details",
-    "displayName": "project_detail"
+    "displayName": "project_detail",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -14,13 +15,14 @@
     "project": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::project.project"
-    },
-    "description": {
-      "type": "text"
+      "target": "api::project.project",
+      "inversedBy": "project_detail"
     },
     "headline": {
       "type": "string"
+    },
+    "description": {
+      "type": "richtext"
     }
   }
 }

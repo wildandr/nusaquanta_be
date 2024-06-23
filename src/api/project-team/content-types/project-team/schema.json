@@ -4,7 +4,8 @@
   "info": {
     "singularName": "project-team",
     "pluralName": "project-teams",
-    "displayName": "project_team"
+    "displayName": "project_team",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -21,10 +22,11 @@
       "relation": "oneToMany",
       "target": "api::job.job"
     },
-    "projects": {
+    "project": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::project.project"
+      "relation": "oneToOne",
+      "target": "api::project.project",
+      "inversedBy": "project_teams"
     }
   }
 }

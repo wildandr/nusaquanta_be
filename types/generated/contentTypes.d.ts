@@ -800,6 +800,11 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
   };
   attributes: {
     category_name: Attribute.String;
+    project: Attribute.Relation<
+      'api::category.category',
+      'manyToOne',
+      'api::project.project'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -890,6 +895,11 @@ export interface ApiProductProduct extends Schema.CollectionType {
   };
   attributes: {
     product_name: Attribute.String;
+    project: Attribute.Relation<
+      'api::product.product',
+      'manyToOne',
+      'api::project.project'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -921,64 +931,38 @@ export interface ApiProjectProject extends Schema.CollectionType {
   };
   attributes: {
     project_name: Attribute.String;
-    product: Attribute.Relation<
+    products: Attribute.Relation<
       'api::project.project',
-      'oneToOne',
+      'oneToMany',
       'api::product.product'
     >;
     image: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
+    categories: Attribute.Relation<
       'api::project.project',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::project.project',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiProjectCategoryProjectCategory
-  extends Schema.CollectionType {
-  collectionName: 'project_categories';
-  info: {
-    singularName: 'project-category';
-    pluralName: 'project-categories';
-    displayName: 'project_category';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    category_id: Attribute.Relation<
-      'api::project-category.project-category',
-      'oneToOne',
+      'oneToMany',
       'api::category.category'
     >;
-    project: Attribute.Relation<
-      'api::project-category.project-category',
+    project_teams: Attribute.Relation<
+      'api::project.project',
+      'oneToMany',
+      'api::project-team.project-team'
+    >;
+    project_detail: Attribute.Relation<
+      'api::project.project',
       'oneToOne',
-      'api::project.project'
+      'api::project-detail.project-detail'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::project-category.project-category',
+      'api::project.project',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::project-category.project-category',
+      'api::project.project',
       'oneToOne',
       'admin::user'
     > &
@@ -992,6 +976,7 @@ export interface ApiProjectDetailProjectDetail extends Schema.CollectionType {
     singularName: 'project-detail';
     pluralName: 'project-details';
     displayName: 'project_detail';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -1002,8 +987,8 @@ export interface ApiProjectDetailProjectDetail extends Schema.CollectionType {
       'oneToOne',
       'api::project.project'
     >;
-    description: Attribute.Text;
     headline: Attribute.String;
+    description: Attribute.RichText;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1028,6 +1013,7 @@ export interface ApiProjectTeamProjectTeam extends Schema.CollectionType {
     singularName: 'project-team';
     pluralName: 'project-teams';
     displayName: 'project_team';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -1043,9 +1029,9 @@ export interface ApiProjectTeamProjectTeam extends Schema.CollectionType {
       'oneToMany',
       'api::job.job'
     >;
-    projects: Attribute.Relation<
+    project: Attribute.Relation<
       'api::project-team.project-team',
-      'oneToMany',
+      'oneToOne',
       'api::project.project'
     >;
     createdAt: Attribute.DateTime;
@@ -1089,7 +1075,6 @@ declare module '@strapi/types' {
       'api::person.person': ApiPersonPerson;
       'api::product.product': ApiProductProduct;
       'api::project.project': ApiProjectProject;
-      'api::project-category.project-category': ApiProjectCategoryProjectCategory;
       'api::project-detail.project-detail': ApiProjectDetailProjectDetail;
       'api::project-team.project-team': ApiProjectTeamProjectTeam;
     }
