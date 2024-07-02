@@ -13,6 +13,12 @@
   "attributes": {
     "job_name": {
       "type": "string"
+    },
+    "project_teams": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::project-team.project-team",
+      "mappedBy": "jobs"
     }
   }
 }

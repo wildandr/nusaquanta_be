@@ -38,17 +38,17 @@
       "target": "api::category.category",
       "mappedBy": "project"
     },
-    "project_teams": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::project-team.project-team",
-      "mappedBy": "project"
-    },
     "project_detail": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::project-detail.project-detail",
       "mappedBy": "project"
+    },
+    "project_teams": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::project-team.project-team",
+      "mappedBy": "projects"
     }
   }
 }

@@ -12,19 +12,21 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "people": {
+    "person": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::person.person"
+      "relation": "manyToOne",
+      "target": "api::person.person",
+      "inversedBy": "project_teams"
     },
     "jobs": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::job.job"
+      "relation": "manyToMany",
+      "target": "api::job.job",
+      "inversedBy": "project_teams"
     },
-    "project": {
+    "projects": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "manyToMany",
       "target": "api::project.project",
       "inversedBy": "project_teams"
     }

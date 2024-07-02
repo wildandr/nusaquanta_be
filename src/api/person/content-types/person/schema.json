@@ -47,6 +47,12 @@
     },
     "cv": {
       "type": "string"
+    },
+    "project_teams": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::project-team.project-team",
+      "mappedBy": "person"
     }
   }
 }

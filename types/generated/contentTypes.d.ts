@@ -835,6 +835,11 @@ export interface ApiJobJob extends Schema.CollectionType {
   };
   attributes: {
     job_name: Attribute.String;
+    project_teams: Attribute.Relation<
+      'api::job.job',
+      'manyToMany',
+      'api::project-team.project-team'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -865,6 +870,11 @@ export interface ApiPersonPerson extends Schema.CollectionType {
     email: Attribute.String & Attribute.Required & Attribute.Unique;
     website: Attribute.String;
     cv: Attribute.String;
+    project_teams: Attribute.Relation<
+      'api::person.person',
+      'oneToMany',
+      'api::project-team.project-team'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -942,15 +952,15 @@ export interface ApiProjectProject extends Schema.CollectionType {
       'oneToMany',
       'api::category.category'
     >;
-    project_teams: Attribute.Relation<
-      'api::project.project',
-      'oneToMany',
-      'api::project-team.project-team'
-    >;
     project_detail: Attribute.Relation<
       'api::project.project',
       'oneToOne',
       'api::project-detail.project-detail'
+    >;
+    project_teams: Attribute.Relation<
+      'api::project.project',
+      'manyToMany',
+      'api::project-team.project-team'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1019,19 +1029,19 @@ export interface ApiProjectTeamProjectTeam extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    people: Attribute.Relation<
+    person: Attribute.Relation<
       'api::project-team.project-team',
-      'oneToMany',
+      'manyToOne',
       'api::person.person'
     >;
     jobs: Attribute.Relation<
       'api::project-team.project-team',
-      'oneToMany',
+      'manyToMany',
       'api::job.job'
     >;
-    project: Attribute.Relation<
+    projects: Attribute.Relation<
       'api::project-team.project-team',
-      'oneToOne',
+      'manyToMany',
       'api::project.project'
     >;
     createdAt: Attribute.DateTime;
