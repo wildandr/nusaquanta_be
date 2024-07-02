@@ -794,15 +794,16 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
     singularName: 'category';
     pluralName: 'categories';
     displayName: 'category';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
     category_name: Attribute.String;
-    project: Attribute.Relation<
+    projects: Attribute.Relation<
       'api::category.category',
-      'manyToOne',
+      'manyToMany',
       'api::project.project'
     >;
     createdAt: Attribute.DateTime;
@@ -947,11 +948,6 @@ export interface ApiProjectProject extends Schema.CollectionType {
       'api::product.product'
     >;
     image: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
-    categories: Attribute.Relation<
-      'api::project.project',
-      'oneToMany',
-      'api::category.category'
-    >;
     project_detail: Attribute.Relation<
       'api::project.project',
       'oneToOne',
@@ -961,6 +957,11 @@ export interface ApiProjectProject extends Schema.CollectionType {
       'api::project.project',
       'manyToMany',
       'api::project-team.project-team'
+    >;
+    categories: Attribute.Relation<
+      'api::project.project',
+      'manyToMany',
+      'api::category.category'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;

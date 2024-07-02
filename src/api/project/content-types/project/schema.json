@@ -32,12 +32,6 @@
         "audios"
       ]
     },
-    "categories": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::category.category",
-      "mappedBy": "project"
-    },
     "project_detail": {
       "type": "relation",
       "relation": "oneToOne",
@@ -48,6 +42,12 @@
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::project-team.project-team",
+      "mappedBy": "projects"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::category.category",
       "mappedBy": "projects"
     }
   }
