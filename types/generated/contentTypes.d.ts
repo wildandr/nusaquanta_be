@@ -1000,6 +1000,8 @@ export interface ApiProjectDetailProjectDetail extends Schema.CollectionType {
     >;
     headline: Attribute.String;
     description: Attribute.RichText;
+    client: Attribute.String;
+    year: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
