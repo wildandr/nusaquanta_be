@@ -963,6 +963,7 @@ export interface ApiProjectProject extends Schema.CollectionType {
       'manyToMany',
       'api::category.category'
     >;
+    project_slug: Attribute.UID<'api::project.project', 'project_name'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

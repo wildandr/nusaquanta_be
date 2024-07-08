@@ -49,6 +49,10 @@
       "relation": "manyToMany",
       "target": "api::category.category",
       "mappedBy": "projects"
+    },
+    "project_slug": {
+      "type": "uid",
+      "targetField": "project_name"
     }
   }
 }
