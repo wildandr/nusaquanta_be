@@ -29,6 +29,10 @@
     },
     "year": {
       "type": "string"
+    },
+    "projectdetail": {
+      "type": "uid",
+      "targetField": "headline"
     }
   }
 }

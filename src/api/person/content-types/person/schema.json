@@ -53,6 +53,10 @@
       "relation": "oneToMany",
       "target": "api::project-team.project-team",
       "mappedBy": "person"
+    },
+    "personSlug": {
+      "type": "uid",
+      "targetField": "full_name"
     }
   }
 }

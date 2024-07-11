@@ -830,6 +830,7 @@ export interface ApiJobJob extends Schema.CollectionType {
     singularName: 'job';
     pluralName: 'jobs';
     displayName: 'job';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -841,6 +842,7 @@ export interface ApiJobJob extends Schema.CollectionType {
       'manyToMany',
       'api::project-team.project-team'
     >;
+    jobSlug: Attribute.UID<'api::job.job', 'job_name'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -876,6 +878,7 @@ export interface ApiPersonPerson extends Schema.CollectionType {
       'oneToMany',
       'api::project-team.project-team'
     >;
+    personSlug: Attribute.UID<'api::person.person', 'full_name'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -900,17 +903,19 @@ export interface ApiProductProduct extends Schema.CollectionType {
     singularName: 'product';
     pluralName: 'products';
     displayName: 'product';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
     product_name: Attribute.String;
-    project: Attribute.Relation<
+    projects: Attribute.Relation<
       'api::product.product',
-      'manyToOne',
+      'manyToMany',
       'api::project.project'
     >;
+    productSlug: Attribute.UID<'api::product.product', 'product_name'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -944,7 +949,7 @@ export interface ApiProjectProject extends Schema.CollectionType {
     project_name: Attribute.String;
     products: Attribute.Relation<
       'api::project.project',
-      'oneToMany',
+      'manyToMany',
       'api::product.product'
     >;
     image: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
@@ -1003,6 +1008,10 @@ export interface ApiProjectDetailProjectDetail extends Schema.CollectionType {
     description: Attribute.RichText;
     client: Attribute.String;
     year: Attribute.String;
+    projectdetail: Attribute.UID<
+      'api::project-detail.project-detail',
+      'headline'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

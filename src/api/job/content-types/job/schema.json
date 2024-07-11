@@ -4,7 +4,8 @@
   "info": {
     "singularName": "job",
     "pluralName": "jobs",
-    "displayName": "job"
+    "displayName": "job",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -19,6 +20,10 @@
       "relation": "manyToMany",
       "target": "api::project-team.project-team",
       "mappedBy": "jobs"
+    },
+    "jobSlug": {
+      "type": "uid",
+      "targetField": "job_name"
     }
   }
 }
