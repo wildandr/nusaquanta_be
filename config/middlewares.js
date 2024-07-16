@@ -6,7 +6,12 @@ module.exports = [
     name: "strapi::cors",
     config: {
       enabled: true,
-      origin: ["https://nusaquanta.com", "http://localhost:3000"], // Tambahkan URL frontend kamu di sini
+      origin: [
+        "https://nusaquanta.com", 
+        "https://www.nusaquanta.com", 
+        "http://localhost:3000", 
+        "http://localhost:3001",
+      ],
       headers: [
         "Content-Type",
         "Authorization",
